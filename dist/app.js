@@ -12,23 +12,23 @@ var _cors = _interopRequireDefault(require("./config/cors.js"));
 
 var _mock = _interopRequireDefault(require("./components/mock/mock"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var app = (0, _express["default"])();
-app.use((0, _morgan["default"])('dev'));
-app.use(_cors["default"]);
-app.use(_express["default"].json());
-app.use(_express["default"].urlencoded({
+const app = (0, _express.default)();
+app.use((0, _morgan.default)('dev'));
+app.use(_cors.default);
+app.use(_express.default.json());
+app.use(_express.default.urlencoded({
   extended: true
 }));
-app.use(_bodyParser["default"].json());
-app.use('/api/v1', _mock["default"].api); // catch 404 and forward to error handler
+app.use(_bodyParser.default.json());
+app.use('/api/v1', _mock.default.api); // catch 404 and forward to error handler
 
-app.use(function (req, res, next) {
-  next((0, _httpErrors["default"])(404));
+app.use((req, res, next) => {
+  next((0, _httpErrors.default)(404));
 }); // error handler
 
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {}; // render the error page
@@ -36,7 +36,7 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-var PORT = process.env.PORT || 4000;
-app.listen(4000, function () {
-  console.log("Server is running on PORT ".concat(PORT));
+const PORT = process.env.PORT || 4000;
+app.listen(4000, () => {
+  console.log(`Server is running on PORT ${PORT}`);
 });
