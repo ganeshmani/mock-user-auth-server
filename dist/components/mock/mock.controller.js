@@ -48,10 +48,15 @@ const deleteAllUsers = async () => {
 
 const isAuthenticated = async (email, password) => {
   let id = undefined;
+  let userResult = null;
   let res = false;
   await userdb.users.findIndex(user => {
     if (user.email === email && user.password === password) {
       id = user.id;
+      userResult = {
+        name: user.name,
+        email: user.email
+      };
       res = true;
     }
   });
