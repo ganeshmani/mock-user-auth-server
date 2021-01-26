@@ -30,7 +30,7 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.render('error');
 });
-
+const PORT = process.env.PORT || 4000;
 app.listen(4000, () => {
-  console.log('Server is running on PORT 4000');
+  console.log(`Server is running on PORT ${PORT}`);
 });
