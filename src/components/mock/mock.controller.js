@@ -44,7 +44,7 @@ const isAuthenticated = async (email, password) => {
       res = true;
     }
   });
-  return { data: id, status: res };
+  return { data: id, status: res, user: userResult };
 };
 
 const postUser = async (name, email, password, imageUrl) => {
@@ -71,7 +71,11 @@ const postUser = async (name, email, password, imageUrl) => {
       'utf8'
     );
     const token = await createToken(newUser);
-    return { data: token, status: true };
+    return {
+      data: token,
+      user: { id: newUser.id, name: newUser.name, email: newUser.email },
+      status: true,
+    };
   } else {
     return { data: undefined, status: false };
   }

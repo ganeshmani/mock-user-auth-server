@@ -62,7 +62,8 @@ const isAuthenticated = async (email, password) => {
   });
   return {
     data: id,
-    status: res
+    status: res,
+    user: userResult
   };
 };
 
@@ -90,6 +91,11 @@ const postUser = async (name, email, password, imageUrl) => {
     const token = await createToken(newUser);
     return {
       data: token,
+      user: {
+        id: newUser.id,
+        name: newUser.name,
+        email: newUser.email
+      },
       status: true
     };
   } else {

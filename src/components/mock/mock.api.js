@@ -24,7 +24,7 @@ router.post(
       return resHandler(res, 401, 'Incorrect email or password');
     const id = response.data;
     const access_token = ctrl.createToken({ email, id });
-    res.status(200).json({ token: access_token });
+    res.status(200).json({ token: access_token, user: response.user });
   })
 );
 
@@ -37,9 +37,11 @@ router.post(
     const response = await ctrl.postUser(name, email, password, imageUrl);
     if (!response.status)
       return resHandler(res, 401, 'User already registered');
-    res
-      .status(200)
-      .json({ message: 'User registered with success', token: response.data });
+    res.status(200).json({
+      message: 'User registered with success',
+      token: response.data,
+      user: response.user,
+    });
   })
 );
 

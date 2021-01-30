@@ -42,7 +42,8 @@ router.post('/auth', _mock2.default.asyncMiddleware(async (req, res) => {
   });
 
   res.status(200).json({
-    token: access_token
+    token: access_token,
+    user: response.user
   });
 }));
 router.post('/users', _mock2.default.asyncMiddleware(async (req, res) => {
@@ -56,7 +57,8 @@ router.post('/users', _mock2.default.asyncMiddleware(async (req, res) => {
   if (!response.status) return resHandler(res, 401, 'User already registered');
   res.status(200).json({
     message: 'User registered with success',
-    token: response.data
+    token: response.data,
+    user: response.user
   });
 }));
 router.get('/users', _mock2.default.asyncMiddleware(async (req, res) => {
